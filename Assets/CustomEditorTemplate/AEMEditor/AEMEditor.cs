@@ -4,6 +4,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+/// <summary>
+/// Wrapper to add a few extra stuff
+/// Show or Hide Script Header
+/// Lock Script
+/// Exclude Certain Property
+/// </summary>
 public abstract class AEMEditor : Editor
 {
     /// <summary>
@@ -22,14 +28,8 @@ public abstract class AEMEditor : Editor
     /// </summary>
     protected List<string> ExcludeProperty = new List<string>();
 
-    /// <summary>
-    /// Unity Event CommandName
-    /// </summary>
     protected string commandName;
 
-    /// <summary>
-    /// Unity function that draws the inspector
-    /// </summary>
     public override void OnInspectorGUI()
     {
         //the current event type the gui is running right now
@@ -41,10 +41,8 @@ public abstract class AEMEditor : Editor
         EditorGUILayout.Separator();
 
         //Locks the Inspector for editing
-#region Lock
         Lock = EditorGUILayout.ToggleLeft("Lock", Lock);
         GUI.enabled = !Lock;
-#endregion
 
         //Any GUI to draw here before default inspector
         BeforeDefaultInspector();
@@ -60,10 +58,6 @@ public abstract class AEMEditor : Editor
     }
     protected virtual void OnEnable()
     {
-        //Optional To be included and modified by child
-        //ShowScriptHeader = false;
-        //Lock = true;
-
         if (!ShowScriptHeader)
         {
             ExcludeProperty.Add("m_script");
@@ -71,38 +65,5 @@ public abstract class AEMEditor : Editor
     }
     protected virtual void BeforeDefaultInspector() { }
     protected virtual void AfterDefaultInspector() { }
-
-    public void ShowList(SerializedProperty list, bool showListSize = true)
-    {
-        EditorGUILayout.PropertyField(list);
-        EditorGUI.indentLevel += 1;
-        if (list.isExpanded)
-        {
-            if (showListSize)
-            {
-                EditorGUILayout.PropertyField(list.FindPropertyRelative("Array.size"));
-            }
-            for (int i = 0; i < list.arraySize; i++)
-            {
-                EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i));
-            }
-        }
-        EditorGUI.indentLevel -= 1;
-    }
-    public void ShowDisabledList(SerializedProperty list, bool showListSize = true, bool disabled = true)
-    {
-        EditorGUI.BeginDisabledGroup(disabled);
-        ShowList(list, showListSize);
-        EditorGUI.EndDisabledGroup();
-    }
-    public void DrawScriptField()
-    {
-        SerializedProperty script = serializedObject.FindProperty("m_Script");
-        EditorGUILayout.ObjectField("Script", script.objectReferenceValue, typeof(MonoScript), false);
-    }
-    public void DrawFakeSeparateLine()
-    {
-        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-    }
 }
 #endif

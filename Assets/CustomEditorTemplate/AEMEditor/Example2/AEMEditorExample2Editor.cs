@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
 
-[CustomEditor(typeof(EditorExample))]
-[CanEditMultipleObjects]
-
-public class EditorExampleEditor : AEMEditor
+[CustomEditor(typeof(AEMEditorExample2))]
+public class AEMEditorExample2Editor : AEMEditor
 {
     AnimBool ShowExtraFields;
     AnimBool ShowTextFields;
@@ -68,7 +66,7 @@ public class EditorExampleEditor : AEMEditor
             EditorGUI.indentLevel++;
             EditorGUILayout.IntField("IntField", 1);
             EditorGUILayout.FloatField("FloatField", 1.0f);
-            EditorGUILayout.LongField("LongField",1);
+            EditorGUILayout.LongField("LongField", 1);
             EditorGUILayout.DoubleField("DoubleField", 1.0f);
             EditorGUI.indentLevel--;
         }
@@ -94,7 +92,7 @@ public class EditorExampleEditor : AEMEditor
         {
             EditorGUI.indentLevel++;
             EditorGUILayout.Slider("FloatSlider", 0, 0, 100);
-            EditorGUILayout.IntSlider("IntSlider",5, 0, 10);
+            EditorGUILayout.IntSlider("IntSlider", 5, 0, 10);
 
             f = EditorGUILayout.Knob(new Vector2(100, 100), f, 0, 10, "Knob", Color.white, Color.red, true);
 
@@ -172,14 +170,14 @@ public class EditorExampleEditor : AEMEditor
 
     public void OnSceneGUI()
     {
-        var t = (target as EditorExample);
+        var t = (target as AEMEditorExample2);
 
         EditorGUI.BeginChangeCheck();
         //Vector3 pos = Handles.PositionHandle(t.lookAtPointss, Quaternion.identity);
         //if (EditorGUI.EndChangeCheck())
         //{
         //    Undo.RecordObject(target, "Move point");
-         //   t.lookAtPointss = pos;
+        //   t.lookAtPointss = pos;
         //}
     }
 }

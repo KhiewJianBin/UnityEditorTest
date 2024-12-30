@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 1025265893}
   - component: {fileID: 1025265894}
   m_Layer: 0
-  m_Name: EditorExample
+  m_Name: AEMEditorExample2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,9 +163,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1025265889}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9889c1d79f14f34c8f106fc6f91dcf8, type: 3}
+  m_Script: {fileID: 11500000, guid: 21aab063740e8e44a8ed44c6a6717315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DefaultBool: 0
+  DefaultFloat: 0
+  DefaultVector: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
